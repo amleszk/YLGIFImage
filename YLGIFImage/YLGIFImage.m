@@ -281,6 +281,18 @@ static NSUInteger _prefetchedNum = 10;
     return self.images ? self.totalDuration : [super duration];
 }
 
+- (void)removeCachedFrames
+{
+    @synchronized(self.images) {
+        NSUInteger count = [self.images count];
+        [self.images removeAllObjects];
+        NSNull *aNull = [NSNull null];
+        for (NSUInteger i = 0; i < count; ++i) {
+            [self.images addObject:aNull];
+        }
+    }
+}
+
 - (void)dealloc {
     if(_imageSourceRef) {
         CFRelease(_imageSourceRef);

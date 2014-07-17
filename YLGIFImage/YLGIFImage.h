@@ -33,4 +33,10 @@
 
 - (UIImage*)getFrameWithIndex:(NSUInteger)idx;
 
+/**
+ Clears cached frames for gif animation. for responding to memory warning
+ */
+
+- (void)removeCachedFrames;
+
 @end
